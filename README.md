@@ -33,6 +33,27 @@ On the Docker host, run the following command:
 docker network create web
 ```
 
+Now create directory for traefik:
+```
+cd ~
+mkdir sites
+cd sites
+git clone https://github.com/bitroniq/docker-compose-traefik.git
+cd docker-compose-traefik
+```
+
+The `docker-compose.yml` provides simple way to create immutable Traefik container and configure it using locally shared config files:
+* `traefik.toml`
+* `acme.json`
+
+Mounting the /var/run/docker.sock Docker socket in the container allows Traefik to listen to Docker events and reconfigure its own internal configuration when containers are created (or shut down).
+
+To boot the container from the ~/sites/docker-compose-traefik directory, run:
+```
+docker-compose up -d
+```
+
+Now you can open your browser and go to `http://localhost:8888` to see the Traefik Dashboard.
 
 ## Release History
 
