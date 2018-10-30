@@ -34,7 +34,7 @@ docker network create web
 ```
 
 Now create directory for traefik:
-```
+```sh
 cd ~
 mkdir sites
 cd sites
@@ -49,7 +49,7 @@ The `docker-compose.yml` provides simple way to create immutable Traefik contain
 Mounting the `/var/run/docker.sock` Docker socket in the container allows Traefik to listen to Docker events and reconfigure its own internal configuration when containers are created (or shut down).
 
 To boot the container from the `~/sites/docker-compose-traefik` directory, run:
-```
+```sh
 docker-compose up -d
 ```
 
