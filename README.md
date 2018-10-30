@@ -17,6 +17,8 @@ The configuration bases on docs that can be found on the traefik project website
 * HTTP traffic can be routed accordingly based on automatic reconfiguration
 * Let's Encrypt to automatically generate and renew SSL certificates per hostname
 
+![](docker-compose-traefik-dashboard.png)
+
 ## Setup
 
 * Server with public IP
