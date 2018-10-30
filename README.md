@@ -3,17 +3,22 @@
 
 [![LICENSE][license-image]][license-url]
 
-Short (up to two paragraphs) statement about your product:
-* The purpose.
-* What it does.
+This docker-compose.yml uses [traefik](https://traefik.io/) - "The Cloud Native Edge Router".
 
-## Installation
+> Traefik is a reverse proxy / load balancer that's easy, dynamic, automatic, fast, full-featured, open source, production proven, provides metrics, and integrates with every major cluster technologies... No wonder it's so popular!
 
-OS X & Linux:
+The configuration bases on docs that can be found on the traefik project website - [Traefik let's Encrypt and Docker](https://docs.traefik.io/user-guide/docker-and-lets-encrypt/)
 
-```sh
-npm install my-module --save
-```
+## Main functions
+* Use Traefik as a layer-7 load balancer
+* SSL termination for a set of micro-services and/or web apps
+* Automatic discovery of any services on the Docker host
+* Traefik reconfigure itself automatically when containers get created (or shut down)
+* HTTP traffic can be routed accordingly based on automatic reconfiguration
+* Let's Encrypt to automatically generate and renew SSL certificates per hostname
+
+## Setup
+
 
 ## Usage example
 
