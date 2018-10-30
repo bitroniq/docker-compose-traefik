@@ -46,14 +46,36 @@ The `docker-compose.yml` provides simple way to create immutable Traefik contain
 * `traefik.toml`
 * `acme.json` - empty file - make sure to `chmod 600 acme.json`
 
-Mounting the /var/run/docker.sock Docker socket in the container allows Traefik to listen to Docker events and reconfigure its own internal configuration when containers are created (or shut down).
+Mounting the `/var/run/docker.sock` Docker socket in the container allows Traefik to listen to Docker events and reconfigure its own internal configuration when containers are created (or shut down).
 
-To boot the container from the ~/sites/docker-compose-traefik directory, run:
+To boot the container from the `~/sites/docker-compose-traefik` directory, run:
 ```
 docker-compose up -d
 ```
 
 Now you can open your browser and go to `http://localhost:8888` to see the Traefik Dashboard.
+
+## Web apps and websites reconfiguration to expose via Traefik
+
+```yml
+version: '2'
+
+services:
+  apache:
+    image: 'bitnami/apache:latest'
+    labels:
+      - "traefik.enabled=true"
+      - "traefik.frontend.rule=Host:fileserver.my-test-domain.com"
+    networks:
+      - web
+    volumes:
+      - ./html:/app
+    restart: always
+
+networks:
+  web:
+    external: true
+```
 
 ## Release History
 
