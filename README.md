@@ -57,6 +57,12 @@ Now you can open your browser and go to `http://localhost:8888` to see the Traef
 
 ## Web apps and websites reconfiguration to expose via Traefik
 
+The only things that must be changed are:
+* to remove the ports exposing definitions (Traefik will expose what is needed automatically)
+* add `networks: web` - services will communicate with Traefik using this network
+* add traefik labels - Traefik needs to know which Layer 7 `Host` must be used for routing traffic
+
+Example - Simple apache config:
 ```yml
 version: '2'
 
