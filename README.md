@@ -19,21 +19,20 @@ The configuration bases on docs that can be found on the traefik project website
 
 ## Setup
 
+* Server with public IP
+* Install latest Docker (i.e. [Get Docker CE for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/))
+  - [Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/)
+* Install latest [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
+* Configure your domain to point to your IP, i.e. `my-test-domain.com`
+  - use also wildcard `CNAME` `*` is an alias `my-test-domain.com`
 
 ## Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-_For more examples and usage, please refer to the [Wiki][wiki]._
-
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-```sh
-make install
-npm test
+On the Docker host, run the following command:
 ```
+docker network create web
+```
+
 
 ## Release History
 
