@@ -16,12 +16,11 @@ defaultEntryPoints = ["https","http"]
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "my-test-domain.com"
 watch = true
 exposedByDefault = false
 
 [acme]
-email = "webmaster@my-test-domain.com"
+email = "test@traefik.io"
 storage = "acme.json"
 entryPoint = "https"
 onHostRule = true
