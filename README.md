@@ -46,7 +46,10 @@ cd docker-compose-traefik
 
 The `docker-compose.yml` provides simple way to create immutable Traefik container and configure it using locally shared config files:
 * `traefik.toml`
-* `acme.json` - empty file - make sure to `chmod 600 acme.json`
+* `acme.json` - empty file - make sure to `chmod 600 acme.json
+```
+echo -n > acme.json && chmod 600 acme.json
+```
 
 Mounting the `/var/run/docker.sock` Docker socket in the container allows Traefik to listen to Docker events and reconfigure its own internal configuration when containers are created (or shut down).
 
