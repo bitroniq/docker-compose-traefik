@@ -106,6 +106,30 @@ services:
     restart: always
 ```
 
+## Global HTTP to HTTPS redirect
+
+The easiest way is to redirect to HTTPS globally. Once configured all your running services will use it.
+
+The configuration of Traefik is displayed in the following code block.
+
+The web entrypoint additionally has a redirection to the websecure entrypoint.
+
+The scheme is defined as https, a predefined scheme by Traefik which automatically turns HTTP into HTTPS.
+
+This results in all traffic coming in at port 80 being redirected to port 443 - the default HTTPS port.
+
+```yml
+  traefik:
+  ...
+    command:
+    ...
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      ...
+```
+
 ## Release History
 
 ### [Unreleased]
