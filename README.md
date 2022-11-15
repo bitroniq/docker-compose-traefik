@@ -110,6 +110,12 @@ services:
 
 ### [Unreleased]
 
+### [v2.0] - 2022-11-15
+#### Updated
+- Updated Screenshots
+- Updated docker-compose
+- Upgrade to Traefik 2.9
+
 ### [v1.1] - 2018-07-17
 #### Fixed
 - Fixed some typos
