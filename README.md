@@ -73,9 +73,16 @@ traefik    | time="2022-11-15T12:26:52Z" level=info msg="Configuration loaded fr
 
 ## Dashboard Screenshots
 
+
+![](traefik-dashboard.png)
+
+![](traefik-dashboard-2.png)
+
+![](traefik-dashboard-3.png)
+
 ## Final verification
 
-
+![](traefik-whoami.png)
 
 ## Web apps and websites reconfiguration to expose via Traefik
 
