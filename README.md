@@ -7,7 +7,7 @@ This docker-compose.yml uses [traefik](https://traefik.io/) - "The Cloud Native 
 
 > Traefik is a reverse proxy / load balancer that's easy, dynamic, automatic, fast, full-featured, open source, production proven, provides metrics, and integrates with every major cluster technologies... No wonder it's so popular!
 
-The configuration bases on docs that can be found on the traefik project website - [Traefik let's Encrypt and Docker](https://docs.traefik.io/user-guide/docker-and-lets-encrypt/)
+The configuration bases on docs that can be found on the traefik project website - [Docker-compose with let's encrypt : HTTP Challenge](https://doc.traefik.io/traefik/user-guides/docker-compose/acme-http/)
 
 ## Main functions
 * Use Traefik as a layer-7 load balancer
@@ -30,11 +30,6 @@ The configuration bases on docs that can be found on the traefik project website
 
 ## Usage example
 
-On the Docker host, run the following command:
-```
-docker network create web
-```
-
 Now create directory for traefik:
 ```sh
 cd ~
@@ -44,32 +39,52 @@ git clone https://github.com/bitroniq/docker-compose-traefik.git
 cd docker-compose-traefik
 ```
 
-The `docker-compose.yml` provides simple way to create immutable Traefik container and configure it using locally shared config files:
-* `traefik.toml`
-* `acme.json` - empty file with permission 600
+The `docker-compose.yml` provides simple way to create immutable Traefik container.
 
-Make sure that `acme.json` file is empty before first use:
-```sh
-echo -n > acme.json && chmod 600 acme.json
-```
+All configration is provided inside `docker-compose.yml`
 
 Mounting the `/var/run/docker.sock` Docker socket in the container allows Traefik to listen to Docker events and reconfigure its own internal configuration when containers are created (or shut down).
+
+## Customize the docker-compose.yml
+
+1. Replace postmaster@example.com by your own email within the `certificatesresolvers.myresolver.acme.email` command line argument of the traefik service.
+2. Replace `whoami.example.com` by your own domain within the `traefik.http.routers.whoami.rule` label of the whoami service.
+3. Optionally uncomment the following lines if you want to test/debug:
+   - `#- "--log.level=DEBUG"`
+   - `#- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"`
+
+## Running traefik
 
 To boot the container from the `~/sites/docker-compose-traefik` directory, run:
 ```sh
 docker-compose up -d
 ```
+Now you can open your browser and go to `http://localhost:8080` to see the Traefik Dashboard.
 
-Now you can open your browser and go to `http://localhost:8888` to see the Traefik Dashboard.
+
+## Checking the logs
+
+```
+root@ubuntu-s-1vcpu-1gb-amd-fra1-01:~/docker-compose-traefik# docker-compose logs -f
+Attaching to simple-service, traefik
+simple-service | 2022/11/15 12:26:52 Starting up on port 80
+traefik    | time="2022-11-15T12:26:52Z" level=info msg="Configuration loaded from flags."
+```
+
+## Dashboard Screenshots
+
+## Final verification
+
+
 
 ## Web apps and websites reconfiguration to expose via Traefik
 
 The only things that must be changed in typical `docker-compose.yml` are:
 * to remove the ports exposing definitions (Traefik will expose what is needed automatically)
-* add `networks: web` - services will communicate with Traefik using this network
 * add traefik labels - Traefik needs to know which Layer 7 `Host` must be used for routing traffic
 
 Example - Simple apache `docker-compose.yml`:
+
 ```yml
 version: '2'
 
@@ -79,15 +94,9 @@ services:
     labels:
       - "traefik.enabled=true"
       - "traefik.frontend.rule=Host:fileserver.my-test-domain.com"
-    networks:
-      - web
     volumes:
       - ./html:/app
     restart: always
-
-networks:
-  web:
-    external: true
 ```
 
 ## Release History
