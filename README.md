@@ -127,7 +127,8 @@ services:
 #### Fixed
 - Some typos
 
-[Unreleased]: https://github.com/bitroniq/readme-template/compare/v1.1...HEAD
+[Unreleased]: https://github.com/bitroniq/readme-template/compare/v2.0...HEAD
+[v2.0]: https://github.com/bitroniq/readme-template/compare/v1.1...v2.0
 [v1.1]: https://github.com/bitroniq/readme-template/compare/v1.0...v1.1
 [v1.0]: https://github.com/bitroniq/readme-template/compare/ff494e6...v1.0
 
